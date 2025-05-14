@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-crm-deployment
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+        - name: demo-crm-container
+          image: pwstaging/demo-crm:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: demo-crm-config
+            - secretRef:
+                name: demo-crm-secret
