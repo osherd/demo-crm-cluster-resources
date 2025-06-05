@@ -1,5 +1,5 @@
 global:
-  storageClass: ebs-gp3
+  storageClass: pd-balanced
 
 architecture: replicaset
 useStatefulSet: true
@@ -19,4 +19,3 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
-

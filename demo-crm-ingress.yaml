@@ -2,15 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: demo-crm-ingress
+  annotations:
+    kubernetes.io/ingress.class: 'gce' # Use GCE ingress controller
 spec:
   rules:
     - host: osher-demo.ddns.net
       http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
                 name: demo-crm-service
                 port:
                   number: 80
-            path: /
-            pathType: Prefix
